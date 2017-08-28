@@ -22,7 +22,7 @@ var ENTITIES_REGEX = new RegExp('(^|\\s|;|\\.|,|:)(' + Object.keys(TYPES).map(fu
 var LOCATION_REGEX = /right|left|behind|front|above|below|atrás|frente|izquierda|derecha|arriba|abajo/gi
 var SIZE_REGEX = /tiny|small|large|huge|diminuto|pequeño|grande|enorme/i
 var SUN_POSITION_REGEX = /sunrise|sunset|morning|noon|afternoon|evening|night|amanecer|atardecer|mañana|mediodía|tarde|noche/i
-var LATLON_REGEX = /\-?\d+\.\d+,\s*\-?\d+\.\d+/
+var LATLON_REGEX = /-?\d+\.\d+,\s*-?\d+\.\d+/
 var MARKER_REGEX = /marker|marcador/i
 var SCENE_LINK_REGEX = /(first|second|third|fourth|fifth|sixth|primera|segunda|tercera|cuarta|quinta|sexta) (scene|escena)/i
 var SCENE_INDEXES = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'primera', 'segunda', 'tercera', 'cuarta', 'quinta', 'sexta']
@@ -165,7 +165,7 @@ function getObjects (p) {
       case '📝':
         var textQuote = getQuote(str)
         if (!textQuote) return
-        var textPos = getPosition(str /*, 14, textQuote.length / 30*/)
+        var textPos = getPosition(str)
         return {
           type: 'text',
           text: textQuote,
@@ -224,7 +224,7 @@ function convertModelPosition (pos) {
 }
 
 function getUrl (str, validate) {
-  var match = str.match(/https?:\/\/[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g)
+  var match = str.match(/https?:\/\/[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/g)
   if (!(match && match.length)) return
   if (validate) {
     match = match.filter(function (m) { return validate.test(m) })
