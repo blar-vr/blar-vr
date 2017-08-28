@@ -117,10 +117,6 @@ const renderChapter = (chapter, i) => `
 const renderObject = (obj, i, j) => {
   let str = ''
   if (obj.marker) {
-    marker = {
-      position: obj.position,
-      scale: obj.scale
-    }
     obj.position = ['']
     obj.scale = ['']
   }
@@ -311,12 +307,6 @@ const renderExternalUrls = story => {
 
   return urls.map(url => `<script src="${url}"></script>`).join('\n')
 }
-
-/**
- * Render click event
- */
-
-const renderEvents = obj => ` onclick="nextChapter(${obj.link})"`
 
 /**
  * Checks if needs a play button for audios and videos
